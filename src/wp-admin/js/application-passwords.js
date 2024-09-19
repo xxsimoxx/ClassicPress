@@ -87,8 +87,6 @@
 			 * @param {Object} request  The request data used to create the password.
 			 */
 			wp.hooks.doAction( 'wp_application_passwords_created_password', response, request );
-
-
 		} ).fail( handleErrorResponse );
 	} );
 
