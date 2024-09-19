@@ -13,7 +13,8 @@
 		$removeAllBtn = $( '#revoke-all-application-passwords' ),
 		tmplNewAppPass = wp.template( 'new-application-password' ),
 		tmplAppPassRow = wp.template( 'application-password-row' ),
-		userId = $( '#user_id' ).val();
+		userId = $( '#user_id' ).val(),
+		successTimeout;
 
 	$newAppPassButton.on( 'click', function( e ) {
 		e.preventDefault();
@@ -67,6 +68,16 @@
 			$appPassTwrapper.show();
 			$appPassTrNoItems.remove();
 
+			$( '#copy-ap' ).on( 'click', function( e ) {
+				navigator.clipboard.writeText( $( this ).data( 'clipboard-text' ) );
+				var successElement = $( '#copy-ap-success' );
+				clearTimeout( successTimeout );
+				successElement.removeClass( 'hidden' );
+				successTimeout = setTimeout( function() {
+					successElement.addClass( 'hidden' );
+				}, 3000 );
+			} );
+
 			/**
 			 * Fires after an application password has been successfully created.
 			 *
@@ -76,6 +87,8 @@
 			 * @param {Object} request  The request data used to create the password.
 			 */
 			wp.hooks.doAction( 'wp_application_passwords_created_password', response, request );
+
+
 		} ).fail( handleErrorResponse );
 	} );
 

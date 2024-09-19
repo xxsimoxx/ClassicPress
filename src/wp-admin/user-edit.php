@@ -1040,6 +1040,8 @@ switch ( $action ) {
 					?>
 				</label>
 				<input id="new-application-password-value" type="text" class="code" readonly value="{{ data.password }}">
+				<button type="button" id="copy-ap" class="button" data-clipboard-text="{{ data.password }}"><?php _e( 'Copy' ); ?></button>
+				<span id="copy-ap-success" class="hidden" aria-hidden="true"><?php _e( 'Copied!' ); ?></span>
 			</p>
 			<p><?php _e( 'Be sure to save this in a safe location. You will not be able to retrieve it.' ); ?></p>
 			<button type="button" class="notice-dismiss">
